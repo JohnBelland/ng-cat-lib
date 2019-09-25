@@ -1,0 +1,164 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ng-cat-lib": {
+      "projectType": "library",
+      "root": "projects/ng-cat-lib",
+      "sourceRoot": "projects/ng-cat-lib/src",
+      "prefix": "cat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-cat-lib/tsconfig.lib.json",
+            "project": "projects/ng-cat-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-cat-lib/src/test.ts",
+            "tsConfig": "projects/ng-cat-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-cat-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-cat-lib/tsconfig.lib.json",
+              "projects/ng-cat-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-cat-tester-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ng-cat-tester-app",
+      "sourceRoot": "projects/ng-cat-tester-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-cat-tester-app",
+            "index": "projects/ng-cat-tester-app/src/index.html",
+            "main": "projects/ng-cat-tester-app/src/main.ts",
+            "polyfills": "projects/ng-cat-tester-app/src/polyfills.ts",
+            "tsConfig": "projects/ng-cat-tester-app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ng-cat-tester-app/src/favicon.ico",
+              "projects/ng-cat-tester-app/src/assets"
+            ],
+            "styles": [
+              "projects/ng-cat-tester-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-cat-tester-app/src/environments/environment.ts",
+                  "with": "projects/ng-cat-tester-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-cat-tester-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-cat-tester-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-cat-tester-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-cat-tester-app/src/test.ts",
+            "polyfills": "projects/ng-cat-tester-app/src/polyfills.ts",
+            "tsConfig": "projects/ng-cat-tester-app/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-cat-tester-app/karma.conf.js",
+            "assets": [
+              "projects/ng-cat-tester-app/src/favicon.ico",
+              "projects/ng-cat-tester-app/src/assets"
+            ],
+            "styles": [
+              "projects/ng-cat-tester-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-cat-tester-app/tsconfig.app.json",
+              "projects/ng-cat-tester-app/tsconfig.spec.json",
+              "projects/ng-cat-tester-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ng-cat-tester-app/e2e/protractor.conf.js",
+            "devServerTarget": "ng-cat-tester-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-cat-tester-app:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ng-cat-lib"
+}
