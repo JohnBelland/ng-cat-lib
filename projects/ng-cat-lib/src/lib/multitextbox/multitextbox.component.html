@@ -1,0 +1,31 @@
+<div [formGroup]="multiTextboxFormGroup" style="width: 100%;">
+  <div formArrayName="valueArray" style="width: 100%;">
+    <div
+      *ngFor="
+        let item of getControls(multiTextboxFormGroup, 'valueArray');
+        let i = index
+      "
+      style="width: 100%;"
+    >
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <input matInput formControlName="value" />
+          <fa-icon
+            style="position: absolute; cursor: pointer;"
+            [icon]="faTimesCircle"
+            (click)="removeTextbox(i)"
+            *ngIf="getControls(multiTextboxFormGroup, 'valueArray').length > 1"
+          ></fa-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <span
+      style="margin-left: 3px; cursor: pointer;"
+      (click)="addTextbox()"
+      *ngIf="showAddNew"
+    >
+      <fa-icon [icon]="faPlusSquare"></fa-icon>
+      Add New
+    </span>
+  </div>
+</div>

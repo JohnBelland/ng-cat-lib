@@ -1,4 +1,5 @@
 {
+  "exclude": ["dist"],
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -11,20 +12,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "ng-cat-lib": [
-        "dist/ng-cat-lib"
-      ],
-      "ng-cat-lib/*": [
-        "dist/ng-cat-lib/*"
-      ]
+      "ng-cat-lib": ["dist/ng-cat-lib"],
+      "ng-cat-lib/*": ["dist/ng-cat-lib/*"]
     }
   },
   "angularCompilerOptions": {

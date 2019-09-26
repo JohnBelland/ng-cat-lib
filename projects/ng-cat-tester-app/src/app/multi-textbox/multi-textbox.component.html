@@ -1,0 +1,8 @@
+<div [formGroup]="testFormGroup" *ngIf="testFormGroup">
+  <cat-multi-textbox formControlName="delimitedData"></cat-multi-textbox>
+  <br />
+  <button (click)="getData()">Get Result</button>
+  <br />
+  <br />
+  {{ gatheredData }}
+</div>
